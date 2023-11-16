@@ -1,0 +1,95 @@
+//import ngx toaster
+@import 'ngx-toastr/toastr';
+
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-end {
+    justify-content: end;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-item-center {
+    align-items: center;
+}
+
+.float-right {
+    float: right;
+}
+
+.login-head {
+    font-size: 1.4rem;
+    color: black;
+    font-weight: 500;
+    text-align: center;
+    margin: 10px;
+}
+
+// .login-wrapper {
+//     height: 100%;
+//     width: 100%;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     margin: 0 auto;
+//     overflow: hidden;
+// }
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.cdk-global-overlay-wrapper mat-dialog-container {
+    max-width: 900px;
+}
+
+.no-data-found{
+    margin-bottom: 0;
+    padding-top: 50px;
+    text-align: center;
+    mat-icon{
+        vertical-align: sub;
+    }
+}
+// //base
+// @import "assets/scss/base/index";
+// //base
+// @import "assets/scss/component/index";
+// //layout
+// @import"assets/scss/layout/index";

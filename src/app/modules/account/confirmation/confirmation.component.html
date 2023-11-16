@@ -1,0 +1,23 @@
+<section class="account-varifiacation">
+    <div class="varifiacation-box">
+        <div class="top-header">
+            <h2 class="title-name">Amazon Tool</h2>
+        </div>
+        <div class="varifiacation-contant-box">
+            <mat-icon [class.unerified-user]="showLoginButton" class="larger-icon">verified_user</mat-icon>
+            <ng-container *ngIf="!showLoginButton;else errorLoginButton">
+                <h3 class="varifiacation-info">your account is
+                    verified</h3>
+            </ng-container>
+            <ng-template #errorLoginButton>
+                <h3 class="varifiacation-info">your account is not verified, please try again later</h3>
+            </ng-template>
+            <button class="back-to-button login-button" (click)="loginPage()">
+                <span class="btn-icon">
+                    <mat-icon>chevron_left</mat-icon>
+                </span>
+                <span class="button-text"> Goto login</span>
+            </button>
+        </div>
+    </div>
+</section>

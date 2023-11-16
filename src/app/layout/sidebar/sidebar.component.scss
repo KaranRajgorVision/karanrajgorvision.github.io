@@ -1,0 +1,228 @@
+                        .example-container {
+                            // height: 500px;
+                            // border: 1px solid rgba(0, 0, 0, 0.5);
+                        }
+
+                        .example-sidenav-content {
+                            // display: flex;
+                            // height: 100%;
+                            // align-items: center;
+                            // justify-content: center;
+                            padding: 25px;
+                            margin-top: 60px;
+                        }
+
+                        .example-sidenav {
+                            user-select: none;
+                        }
+
+                        .full-width {
+                            width: 100%;
+                        }
+
+                        .menu-button {
+                            transition: 300ms ease-in-out;
+                            transform: rotate(0deg);
+                        }
+
+                        .menu-button.rotated {
+                            transform: rotate(180deg);
+                        }
+
+                        .submenu {
+                            overflow-y: hidden;
+                            transition: transform 300ms ease;
+                            transform: scaleY(0);
+                            transform-origin: top;
+                            padding-left: 30px;
+                        }
+
+                        .submenu.expanded {
+                            transform: scaleY(1);
+                        }
+
+                        // ::ng-deep .mat-toolbar-single-row {
+                        //   padding: 0px !important;
+                        // }
+                        // ::ng-deep .mat-drawer-inner-container{
+                        //   width: 150px !important;
+                        // }
+                        .mat-toolbar {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            z-index: 1030
+                        }
+
+                         ::ng-deep .mat-sidenav {
+                            margin-top: 64px;
+                            position: fixed;
+                        }
+
+                        .mat-mdc-list-item {
+                            margin: 20px 0;
+                        }
+
+                        .mat-mdc-list-base .mat-icon {
+                            margin-right: 15px;
+                            margin-bottom: -6px;
+                            color: #3f51b5;
+                        }
+
+                        .active {
+                            // background-color: #3f51b5;
+                            /* Background color for active tab */
+                            color: #3f51b5;
+                            /* Text color for active tab */
+                            font-weight: bold;
+                            /* Adjust text weight for active tab */
+                        }
+
+                        // @import "/src/styles/color.scss";
+                        // @import "/src/styles/font.scss";
+                        // @import "/src/styles/variables.scss";
+                        // .mat-mdc-list-base {
+                        //     border-bottom: 1px solid #D8D8D880;
+                        //     width: 210px;
+                        //     padding-bottom: 16px;
+                        //     & .mat-list-item {
+                        //         display: flex;
+                        //         cursor: pointer;
+                        //         color: white !important;
+                        //         width: auto;
+                        //         padding-left: 4px;
+                        //         &.active {
+                        //             color: white !important;
+                        //             background-color: #3f51b5;
+                        //             outline: none;
+                        //             & .mat-icon {
+                        //                 color: white !important;
+                        //             }
+                        //             & .circle {
+                        //                 background-color: #536DFE;
+                        //             }
+                        //         }
+                        //         &:hover {
+                        //             background-color: #F3F5FF;
+                        //         }
+                        //         &:focus {
+                        //             outline: none;
+                        //         }
+                        //     }
+                        // }
+                        // .mat-mdc-list-base {
+                        //     // border-bottom: 1px solid #D8D8D880;
+                        //     width: 200px;
+                        //     padding: 20px;
+                        //     .mat-list-item {
+                        //         display: flex;
+                        //         cursor: pointer;
+                        //         color: white !important;
+                        //         width: auto;
+                        //         padding-left: 4px;
+                        //         &-.active {
+                        //             color: white !important;
+                        //             background-color: #3f51b5;
+                        //             outline: none;
+                        //             .mat-icon {
+                        //                 margin-right: 15px;
+                        //                 margin-bottom: -6px;
+                        //                 color: white !important;
+                        //             }
+                        //             .circle {
+                        //                 background-color: #536DFE;
+                        //             }
+                        //         }
+                        //         &:hover {
+                        //             background-color: #F3F5FF;
+                        //         }
+                        //         &:focus {
+                        //             outline: none;
+                        //         }
+                        //     }
+                        // }
+                        .mat-mdc-list-base {
+                            width: 200px;
+                            padding: 20px;
+                            .mat-list-item {
+                                display: flex;
+                                cursor: pointer;
+                                color: white !important;
+                                width: auto;
+                                padding-left: 4px;
+                                .active {
+                                    &:hover,
+                                    &.active {
+                                        // color: white !important;
+                                        color: #3f51b5;
+                                        outline: none;
+                                        .mat-icon {
+                                            margin-right: 15px;
+                                            margin-bottom: -6px;
+                                            color: red !important;
+                                            /* Change the color to your preferred color */
+                                        }
+                                        .circle {
+                                            background-color: #536DFE;
+                                        }
+                                    }
+                                    &:hover {
+                                        background-color: #F3F5FF;
+                                    }
+                                    &:focus {
+                                        outline: none;
+                                    }
+                                }
+                            }
+                            .mat-icon {
+                                margin-right: 15px;
+                                margin-bottom: -6px;
+                                color: black;
+                            }
+                            .sidebar-title {
+                                color: rgba(110, 110, 110, 0.8);
+                                ;
+                                font-size: 16px;
+                                text-transform: uppercase;
+                                margin-top: 32px;
+                                margin-left: 24px;
+                                margin-bottom: 16px;
+                            }
+                            .circle {
+                                width: 5px;
+                                height: 5px;
+                                border-radius: 50%;
+                                background-color: rgba(110, 110, 110, 0.8);
+                                margin-right: 30px;
+                            }
+                            .project-circle {
+                                width: 8px;
+                                height: 8px;
+                                border-radius: 50%;
+                                margin-right: 15px;
+                                margin-left: 8px;
+                            }
+                        }
+
+                        //color for sidebar
+
+                        .mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive){
+                          cursor: pointer;
+                        }
+                        .spinner-container {
+                          display: flex;
+                          justify-content: center;
+                          /* Center horizontally */
+                          align-items: center;
+                          /* Center vertically */
+                          height: 100vh;
+                          /* Set the container height to the full viewport height */
+                          position: fixed;
+                          /* Make it a fixed position to overlay the whole page */
+                          top: 0;
+                          left: 0;
+                          right: 0;
+                          bottom: 0;
+                          background-color: rgba(0, 0, 0, 0.5);
+                          /* Optional: Add a semi-transparent background */
+                      }

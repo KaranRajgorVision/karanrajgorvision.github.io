@@ -1,0 +1,119 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <div class="top-title" *ngIf="addUserTitleShow">
+        <h2 class="title-text">Add User</h2>
+    </div>
+    <mat-card class="mat-elevation-z12 card_wrapper">
+        <form *ngIf="!showMessageAfterREgister;else showMessageErroeMessage" [formGroup]="RagistrationForm"
+            (ngSubmit)="submit()" class="example-form">
+            <mat-card-content class="input-group gap">
+                <!-- <mat-card-title class="login-head">{{ 'Register' | translate }}</mat-card-title> -->
+                <!-- <mat-form-field class="width-100">
+                    <input matInput placeholder="{{ 'Username' | translate }}" required name="username"
+                        formControlName="username">
+                    <mat-error *ngIf="f['username'] && f['username'].errors && f['username'].errors['required']">{{
+                        'UserName-Error' | translate }}</mat-error>
+                    <mat-icon matSuffix><i class="fa fa-user-circle" aria-hidden="true"></i></mat-icon>
+                </mat-form-field> -->
+                <mat-form-field class="width-100">
+                    <input matInput placeholder="{{ 'CompanyName' | translate }}" required name="companyName"
+                        formControlName="companyName">
+                    <mat-error
+                        *ngIf="f['companyName'] && f['companyName'].errors && f['companyName'].errors['required']">{{
+                        'CompanyName-Error' | translate }}</mat-error>
+                    <mat-icon matSuffix><i class="fa fa-building" aria-hidden="true"></i></mat-icon>
+                </mat-form-field>
+                <mat-form-field class="width-50">
+                    <input matInput placeholder="{{ 'First-Name' | translate }}" required name="firstName"
+                        formControlName="firstName">
+
+                    <mat-error
+                        *ngIf="f['firstName'] && f['firstName'].errors && f['firstName'].errors['required']">{{'First-Name-Error'|
+                        translate}}</mat-error>
+                    <!-- <mat-icon matSuffix>account_circle</mat-icon> -->
+                </mat-form-field>
+                <mat-form-field class="width-50">
+                    <input matInput placeholder="{{ 'Last-Name' | translate }}" required name="lastName"
+                        formControlName="lastName">
+                    <mat-error
+                        *ngIf="f['lastName'] && f['lastName'].errors && f['lastName'].errors['required']">{{'Last-Name-Error'|
+                        translate}}</mat-error>
+                    <!-- <mat-icon matSuffix>account_circle</mat-icon> -->
+                </mat-form-field>
+                <mat-form-field class="width-100">
+                    <input matInput placeholder="{{ 'PhoneNo' | translate }}" required name="phoneNo"
+                        formControlName="phoneNo" maxlength="12" appNumberValidator>
+                    <!-- <input matInput placeholder="Email"  ngModel #email="ngModel"> -->
+                    <mat-error *ngIf="f['phoneNo'] && f['phoneNo'].errors && f['phoneNo'].errors['required']">{{
+                        'PhoneNo-Error' | translate }}</mat-error>
+                    <!-- *ngIf="username.invalid">Email is required</mat-error> -->
+                    <!-- <mat-icon matSuffix><i class="fa fa-building" aria-hidden="true"></i></mat-icon> -->
+                    <mat-icon matSuffix>phone_iphone</mat-icon>
+                </mat-form-field>
+                <mat-form-field class="width-100">
+                    <input matInput placeholder="{{ 'Email' | translate }}" required name="email"
+                        formControlName="email">
+                    <mat-error *ngIf="f['email'] && f['email'].errors && f['email'].errors['required']">{{ 'Email-Error'
+                        | translate }}</mat-error>
+                    <mat-error *ngIf="f['email'].hasError('pattern')">Invalid email address.</mat-error>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+                <mat-form-field class="width-100">
+                    <input matInput type="password" placeholder="{{ 'Password' | translate }}" required name="password"
+                        formControlName="password">
+                    <mat-error *ngIf="f['password'] && f['password'].errors && f['password'].errors['required']">
+                        {{'Password-Error'| translate}}</mat-error>
+                    <!-- <mat-icon matSuffix>password</mat-icon> -->
+                    <mat-icon matSuffix> vpn_key</mat-icon>
+                </mat-form-field>
+                <mat-form-field class="width-100">
+                    <input matInput type="password" placeholder="{{ 'ConfirmPassword' | translate }}" required
+                        name="confirmPassword" formControlName="confirmPassword">
+                    <mat-error
+                        *ngIf="f['confirmPassword'] && f['confirmPassword'].errors && f['confirmPassword'].errors['required'] && !passwordNotMatch">
+                        {{'Confirm-Password-Error'| translate}}</mat-error>
+                    <!-- <mat-error [class.display]="passwordNotMatch?'block':'none'">
+                        not match password </mat-error> -->
+                    <mat-hint class="validation" [style.display]="passwordNotMatch?'block':'none'">
+                        {{'Confirm-Password-Match-Error'| translate}}
+                    </mat-hint>
+                    <mat-icon matSuffix> password</mat-icon>
+                </mat-form-field>
+
+
+                <div class="width-100">
+                    <h4 *ngIf="this.isdataExist" class="validation validation-box">{{'User-Name-Exist'| translate}}
+                    </h4>
+                </div>
+                <button mat-raised-button color="primary" class="login-button">
+                    {{'Submit'| translate}}
+                </button>
+            </mat-card-content>
+        </form>
+        <!-- <div *ngIf="error" class="error">
+            {{ error }}
+        </div>
+        <div class="login-link">
+            <span class="login-link-tag">{{ 'AlreadyUser' | translate}} ? <a routerLink="/auth/login" class="login-link-tag">{{ 'ClickToLogin' | translate}}</a> </span>
+        </div> -->
+        <ng-template #showMessageErroeMessage>
+            <div class="gmail-message">
+                <div class="section-title-box">
+                    <h2 class="title-name">E-mail Confirmation</h2>
+                    <p class="title-description">We have just sent an email to the address you povided. Please click on
+                        the link to confirm your registration.
+                    </p>
+                </div>
+                <button class="back-to-button login-button" (click)="loginPage()">
+                    <span class="btn-icon">
+                        <mat-icon>chevron_left</mat-icon>
+                    </span>
+                    <span class="button-text"> Goto login</span>
+                </button>
+            </div>
+
+        </ng-template>
+    </mat-card>
+</div>
+<div class="spinner-container" *ngIf="isLoaderShow">
+    <mat-spinner></mat-spinner>
+</div>

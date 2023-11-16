@@ -1,0 +1,24 @@
+<div class="link_wrapper">
+    <div class="d-flex justify-content-between">
+        <h1 mat-dialog-title>Update Link</h1>
+        <span class="closeIcon">  <mat-icon matSuffix (click)="onNoClick()">close</mat-icon></span>
+    </div>
+    <div mat-dialog-content class="file-link-modal">
+        <form [formGroup]="linkForm" class=" d-flex flex-column">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Add File Link" formControlName="fileLink" required>
+                <mat-error *ngIf="f['fileLink'].hasError('required'); else patternError">Url is required !!!</mat-error>
+                <ng-template #patternError class="mt-1">
+                    <mat-error *ngIf="f['fileLink'].hasError('pattern')">Invalid Url !!!</mat-error>
+                </ng-template>
+                <mat-icon matSuffix>link</mat-icon>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="UpdateUserDataLink()">
+        Submit
+     </button>
+        </form>
+    </div>
+</div>
+<div class="spinner-container" *ngIf="isLoaderShow">
+    <mat-spinner></mat-spinner>
+</div>

@@ -1,0 +1,173 @@
+.fileDailog_wrapper {
+  height: 100%;
+  width: 850px;
+  overflow: auto;
+  min-height: 450px;
+}
+
+.cdk-global-overlay-wrapper mat-dialog-container {
+  width: auto !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.p-2 {
+  padding: 20px;
+}
+
+.input_fileupload--hidden {
+  display: none;
+}
+
+.validation {
+  color: red;
+  margin-left: 30px;
+  font-size: 0.8rem;
+}
+
+.t-head {
+  font-size: 1rem;
+  color: black;
+  font-weight: 500;
+  text-align: start;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100vh;
+  /* Set the container height to the full viewport height */
+  position: fixed;
+  /* Make it a fixed position to overlay the whole page */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Optional: Add a semi-transparent background */
+}
+
+.fileData {
+  box-shadow: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 400px;
+  // width: 100%;
+
+  .name {
+    margin-bottom: 0px;
+  }
+
+  .status {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mat-mdc-cell {
+    padding-top: 8px !important;
+  }
+
+  ::ng-deep.mat-mdc-table {
+    white-space: nowrap;
+    overflow: auto !important;
+  }
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
+  padding: 8px;
+}
+
+.nameEllipsis {
+  white-space: nowrap !important;
+  max-width: 200px !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important
+}
+
+// ::ng-deep .mdc-dialog .mdc-dialog__content {
+//     padding: 0px 30px 10px 24px !important;
+// }
+::ng-deep .mdc-dialog__content>:last-child {
+  float: right;
+}
+
+.fileData .mat-elevation-z8 {
+  box-shadow: none !important;
+}
+
+.close {
+  padding: 20px 30px 20px 24px;
+  float: right;
+
+  .close-btn {
+    background-color: #3f51b5;
+    color: white;
+  }
+}
+
+.primary-cms-color {
+  color: white;
+  background-color: #ff4081;
+}
+
+.action-btn {
+  border: none;
+  border-radius: 5px;
+  display: inline-block;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 5px 8px;
+  line-height: 22px;
+
+  .delete-btn {
+    margin-bottom: 4px;
+  }
+
+  .mat-icon {
+    font-size: 19px;
+  }
+}
+
+.closeIcon {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgb(170, 169, 169);
+  margin: 20px;
+}
+
+.action-button-group {
+  button+button {
+    margin-left: 10px;
+  }
+}
+
+
+.accent {
+  background-color: green;
+  color: white;
+}
+
+.disable {
+  background-color: gray !important;
+}
+
+.backgroound-row-1 {
+  background-color: #ffa50020;
+}
+
+.backgroound-row-2 {
+  background-color: #00800020;
+}
+
+.backgroound-row-3 {
+  background-color: #ff000020;
+}

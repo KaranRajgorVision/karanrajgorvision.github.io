@@ -1,0 +1,64 @@
+.wrapper {
+    height: 100vh;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
+    height: 100vh;
+    /* Set the container height to the full viewport height */
+    position: fixed;
+    /* Make it a fixed position to overlay the whole page */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Optional: Add a semi-transparent background */
+}
+
+tr td,
+tr th {
+    min-width: 150px;
+    text-align: center !important;
+}
+
+.cms-table {
+    overflow-x: auto;
+    width: 100%;
+}
+
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

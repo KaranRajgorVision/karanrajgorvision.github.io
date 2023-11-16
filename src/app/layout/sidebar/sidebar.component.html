@@ -1,0 +1,21 @@
+<mat-list>
+  <mat-list-item routerLink="dashboard" routerLinkActive="active">
+    <mat-icon>home</mat-icon> <span>Dashboard</span>
+  </mat-list-item>
+  <mat-list-item routerLink="user" *ngIf="this.decodeToken?.role === 'admin'" routerLinkActive="active">
+    <mat-icon><i class="fa fa-user-circle-o" style="font-size:22px"></i></mat-icon> User
+  </mat-list-item>
+  <mat-list-item (click)="ProcessCSVData()" *ngIf="this.decodeToken?.role === 'admin'">
+    <mat-icon>build</mat-icon> Service for CSV
+  </mat-list-item>
+  <mat-list-item (click)="ProcessLinkData()" *ngIf="this.decodeToken?.role === 'admin'">
+    <mat-icon>cached</mat-icon> Service for Link
+  </mat-list-item>
+  <mat-list-item routerLink="/setting" routerLinkActive="active" *ngIf="this.decodeToken?.role !== 'admin'">
+    <mat-icon>settings</mat-icon><span class="siderbar-list-item">Setting</span>
+  </mat-list-item>
+</mat-list>
+
+<div class="spinner-container" *ngIf="isLoaderShow">
+  <mat-spinner></mat-spinner>
+</div>
