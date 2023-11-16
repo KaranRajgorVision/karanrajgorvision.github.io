@@ -1,0 +1,58 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <div class="login-page">
+        <div class="headerClass">
+            <app-language-drop-down (selectedLanguageOut)="getCurrentLanguage($event)"></app-language-drop-down>
+        </div>
+        <mat-card class="mat-elevation-z12 card_wrapper">
+            <mat-tab-group>
+                <mat-tab  [label]="'Log-In'|translate">
+                    <!-- <mat-card-title class="login-head">{{ 'Login' | translate }}</mat-card-title> -->
+                    <!-- <mat-card-title class="login-head">{{ 'Login' | translate }}</mat-card-title> -->
+                    <mat-card-content class="car_content">
+                        <form class="example-form" [formGroup]="LoginForm" (ngSubmit)="submit(LoginForm.value)">
+                            <mat-form-field>
+                                <input matInput placeholder="{{ 'Email' | translate }}" required name="email"
+                                    formControlName="email">
+                                <mat-error
+                                    *ngIf="f['email'] && f['email'].errors && f['email'].errors['required']">{{'Email-Error'|
+                                    translate}}</mat-error>
+                                <mat-icon matSuffix>email</mat-icon>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput placeholder="{{ 'Password' | translate }}" type="password"
+                                    formControlName="password">
+                                <mat-error
+                                    *ngIf="f['password'] && f['password'].errors && f['password'].errors['required']">{{'Password-Error'|
+                                    translate}}</mat-error>
+                                <mat-error *ngIf="f['password'].errors && f['password'].errors['minlength']">
+                                    {{'Password-Length-Error'| translate}}
+                                </mat-error>
+                                <mat-icon matSuffix>lock</mat-icon>
+                            </mat-form-field>
+                            <!-- <button mat-raised-button color="primary" class="login-button">
+                                Sign In
+                            </button> -->
+
+                            <div class="width-100">
+                                <h4 *ngIf="this.isErrorMessage" class="validation">{{ 'Email-Password-Invalid' |
+                                    translate }}
+                                </h4>
+                            </div>
+
+                            <button mat-raised-button color="primary" class="login-button">
+                                {{'Submit'| translate}}
+                            </button>
+
+
+                        </form>
+                    </mat-card-content>
+
+
+                </mat-tab>
+                <mat-tab [label]="'Register'|translate">
+                    <app-register></app-register>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,231 @@
+.account-varifiacation {
+    background-color: #303F9F;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+
+    .varifiacation-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        background: white;
+        max-width: 500px;
+        width: 100%;
+        padding: 30px;
+
+        .larger-icon {
+
+            &.unerified-user {
+                position: relative;
+
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 45%;
+                    left: -18px;
+                    height: 10px;
+                    background: red;
+                    width: calc(100% + 20%);
+                    transform: rotate(41deg);
+                    bottom: 0;
+                    right: 0;
+                    border-radius: 10px;
+                }
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 45%;
+                    left: -18px;
+                    height: 10px;
+                    background: red;
+                    width: calc(100% + 20%);
+                    transform: rotate(318deg);
+                    bottom: 0;
+                    right: 0;
+                    border-radius: 10px;
+                }
+
+            }
+
+
+            &.mat-icon {
+                $iconZise: 200px;
+                width: $iconZise;
+                font-size: $iconZise;
+                line-height: $iconZise;
+                height: unset;
+                color: #303F9F;
+            }
+        }
+
+
+        .varifiacation-contant-box {
+            text-align: center;
+            padding-top: 40px;
+            padding-bottom: 20px;
+
+            .varifiacation-info {
+                font-size: 22px;
+                text-transform: capitalize;
+                margin: 15px 0 40px 0;
+            }
+        }
+    }
+
+    h2.title-name {
+        font-size: 36px;
+        text-align: center;
+        padding-bottom: 15px;
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            height: 2px;
+            background-color: #303F9F;
+            max-width: 200px;
+            width: 100%;
+            margin: auto;
+            border-radius: 10px;
+        }
+    }
+
+    .back-to-button {
+        padding: 10px 15px;
+        height: auto;
+        font-size: 16px;
+        margin: auto;
+        border: none;
+        background: transparent;
+        display: flex;
+        align-items: center;
+        line-height: 25px;
+        background-color: #303F9F;
+        color: white;
+        border-radius: 4px;
+        overflow: hidden;
+
+        &.login-button {
+            &:focus {
+                outline: unset;
+            }
+
+            .button-text {
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                padding-left: 0;
+                padding-right: 20px;
+                text-transform: capitalize;
+            }
+
+            .btn-icon {
+                display: inline-block;
+                overflow: hidden;
+                height: 25px;
+                width: 40px;
+                position: relative;
+
+                &:after {
+                    content: "";
+                    opacity: 0;
+                    transition: all 1s linear;
+                }
+            }
+
+        }
+
+        &:hover {
+            .mat-icon {
+                transform: translateX(0);
+                transform: translateX(-35px);
+                animation-name: gotoBack;
+                animation-duration: 1s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite;
+                animation-direction: normal;
+            }
+
+            .btn-icon {
+                &:after {
+                    content: "";
+                    position: absolute;
+                    height: 2px;
+                    right: 0;
+                    background: white;
+                    top: 44%;
+                    width: 55%;
+                    // transform: translateY(-40%);
+                    animation-name: gotoBack;
+                    animation-duration: 1s;
+                    animation-timing-function: linear;
+                    animation-iteration-count: infinite;
+                    animation-direction: normal;
+                    border-radius: 10px;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+@keyframes gotoBack {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-35px);
+    }
+}
+
+@keyframes widthAdd {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+
+    50% {
+        width: 100%;
+        opacity: 1;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width:576.98px) {
+    .account-varifiacation {
+        .varifiacation-box {
+            position: relative;
+            top: unset;
+            left: unset;
+            transform: unset;
+            margin: 50px 30px;
+            width: unset;
+
+            .larger-icon {
+                &.mat-icon {
+                    $iconZise: 100px;
+                    width: $iconZise;
+                    font-size: $iconZise;
+                    line-height: $iconZise;
+
+                }
+            }
+        }
+
+        h2.title-name {
+            font-size: 30px;
+        }
+    }
+}

@@ -1,0 +1,73 @@
+<div class="fileDailog_wrapper">
+  <!-- content -->
+  <span class="dialog_heading">
+    <div class="d-flex justify-content-between align-item-center">
+      <h1 mat-dialog-title>File Upload</h1>
+      <p class="closeIcon">
+        <mat-icon matSuffix (click)="onNoClick()">close</mat-icon>
+      </p>
+    </div>
+
+    <span class="d-flex justify-content-between p-2">
+      <input #fileUpload type="file" (change)="onFileSelected($event)">
+      <button mat-raised-button color="primary" (click)="ImportHistoricalData()"
+        [disabled]="buttonClicked && !inputFileName">
+        <mat-icon>upload</mat-icon>Upload
+      </button>
+    </span>
+    <span *ngIf="!inputFileName && buttonClicked" class="validation">File is required.</span>
+  </span>
+  <!-- data table -->
+  <div class="fileData mat-elevation-z8 cms-table" *ngIf="filelistData.length > 0">
+    <table mat-table [dataSource]="dataSource">
+      <!-- <ng-container matColumnDef="fileName">
+                <th mat-header-cell *matHeaderCellDef>File Name </th>
+                <td mat-cell *matCellDef="let item" class="nameEllipsis"><span>{{ item.fileName }}</span> </td>
+            </ng-container> -->
+      <ng-container matColumnDef="view">
+        <th mat-header-cell *matHeaderCellDef class="t-head" width="100px">View</th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-raised-button class="action-btn" color="primary" (click)="ViewUserUplodedFile(item)">
+            <mat-icon>visibility</mat-icon>View</button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef class="t-head" width="200px">File Name</th>
+        <td mat-cell *matCellDef="let item" class="nameEllipsis">
+          {{ item.fileName }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef class="t-head" width="120px">Created Date</th>
+        <td mat-cell *matCellDef="let item">{{ item.createdDate }}</td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="t-head" width="120px">Status</th>
+        <td mat-cell *matCellDef="let item">{{ item.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="t-head" width="200px">Action</th>
+        <td class="action-button-group" mat-cell *matCellDef="let item">
+          <button mat-raised-button class="action-btn primary-cms-color" *ngIf="item.status === 'Process Pending'"
+            (click)="deleteHistoricalFile(item)">
+            <mat-icon matTooltip="Delete">delete</mat-icon>Delete
+          </button>
+          <button mat-raised-button class="action-btn primary-cms-color" *ngIf="item.status === 'Processed'"
+            (click)="revertHistoricalFile(item)">
+            <mat-icon matTooltip="Revert">undo</mat-icon>Revert
+          </button>
+          <button *ngIf="item.status == 'Review Pending'" mat-raised-button class="action-btn accent"
+            (click)="AcceptRejectHistoricalUserDataFile(item,true)"><mat-icon>check</mat-icon>Accept</button>
+          <button *ngIf="item.status == 'Review Pending'" mat-raised-button class="action-btn" color="warn"
+            (click)="AcceptRejectHistoricalUserDataFile(item,false)"><mat-icon>close</mat-icon> Reject</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row ngClass="{{'backgroound-row-'+setDataColor(row)}}"  *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+  <div class="spinner-container" *ngIf="isLoaderShow">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>

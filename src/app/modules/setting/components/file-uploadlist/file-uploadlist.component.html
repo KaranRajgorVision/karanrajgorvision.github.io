@@ -1,0 +1,74 @@
+<div class="fileDailog_wrapper">
+    <div class="dialog_heading">
+        <div class="top-header">
+            <h3 class="title-name">File Upload</h3>
+        </div>
+
+        <div class="file-upload-box">
+            <div class="upload-file">
+                <input id="ulopad-file" #fileUpload type="file" (change)="onFileSelected($event)">
+                <label class="upload-text" for="ulopad-file"> <mat-icon>cloud_upload</mat-icon> 
+                    <span class="upload-text-inner">{{inputFileName?inputFileName:'upload file'}}
+                    </span></label>
+            </div>
+            <button mat-raised-button color="primary" (click)="ImportHistoricalData()"
+                [disabled]="buttonClicked && !inputFileName">
+                <mat-icon>upload</mat-icon>Upload
+            </button>
+            <p *ngIf="!inputFileName && buttonClicked" class="validation">File is required.</p>
+        </div>
+
+
+        <!-- <span class="d-flex justify-content-between p-2">
+            <input #fileUpload type="file" (change)="onFileSelected($event)">
+            <button mat-raised-button color="primary" (click)="ImportHistoricalData()"
+                [disabled]="buttonClicked && !inputFileName">
+                <mat-icon>upload</mat-icon>Upload
+            </button>
+        </span>
+        <span *ngIf="!inputFileName && buttonClicked" class="validation">File is required.</span> -->
+
+    </div>
+    <!-- data table -->
+    <div class="fileData mat-elevation-z8 cms-table" *ngIf="filelistData.length > 0">
+        <table mat-table [dataSource]="dataSource">
+            <!-- <ng-container matColumnDef="fileName">
+                <th mat-header-cell *matHeaderCellDef>File Name </th>
+                <td mat-cell *matCellDef="let item" class="nameEllipsis"><span>{{ item.fileName }}</span> </td>
+            </ng-container> -->
+            <ng-container matColumnDef="fileName">
+                <th mat-header-cell *matHeaderCellDef class="t-head">File Name</th>
+                <td mat-cell *matCellDef="let item" class="nameEllipsis">
+                    {{ item.fileName }}
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="createdDate">
+                <th mat-header-cell *matHeaderCellDef class="t-head">Created Date</th>
+                <td mat-cell *matCellDef="let item">{{ item.createdDate }}</td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="t-head">Status</th>
+                <td mat-cell *matCellDef="let item">{{ item.status }}</td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef class="t-head">Action</th>
+                <td mat-cell *matCellDef="let item">
+                    <button class="action-btn" *ngIf="item.status === 'Pending'" (click)="deleteHistoricalFile(item)">
+                        <mat-icon matTooltip="Delete">delete</mat-icon>
+                        <p class="delete-btn">Delete</p>
+                    </button>
+                    <button class="action-btn" *ngIf="item.status === 'Processed'" (click)="revertHistoricalFile(item)">
+                        <mat-icon matTooltip="Revert">undo</mat-icon>
+                        <p class="delete-btn">Revert</p>
+                    </button>
+                </td>
+            </ng-container> -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+    </div>
+    <div class="spinner-container" *ngIf="isLoaderShow">
+        <mat-spinner></mat-spinner>
+    </div>
+</div>

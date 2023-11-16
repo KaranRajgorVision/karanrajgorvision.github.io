@@ -1,0 +1,42 @@
+// @import "src/app/styles/variables";
+// @import "src/app/styles/colors";
+.main_wrapper {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.content_wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #F6F7FF;
+}
+
+.Content {
+    background-color: #F6F7FF;
+    // padding: 75px 10px;
+    padding: 65px 10px 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.layout-sidebar {
+    height: calc(100vh - 64px);
+    margin-top: 50px;
+    overflow: hidden;
+    @media (max-width: 576px) {
+        width: 218px;
+    }
+}
+
+.layout-content {
+    // background-color: #F6F7FF;
+    // height: calc(100vh - 64px);
+    // margin-top: 50px;
+    // padding: 0px 24px;
+    // //   margin-left: 211px !important;
+    // @media (max-width: 576px) {
+    //     width: 100%;
+    // }
+}

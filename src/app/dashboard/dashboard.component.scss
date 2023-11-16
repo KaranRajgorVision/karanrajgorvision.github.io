@@ -1,0 +1,190 @@
+.Dashboard {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    padding: 30px 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+tr td,
+tr th {
+    min-width: 150px;
+    text-align: center !important;
+}
+
+.cms-table {
+    overflow-x: auto;
+    width: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.headerClass {
+    display: flex;
+    justify-content: space-between;
+}
+
+::ng-deep .mat-mdc-card-header {
+    background-color: #f5f5f5;
+    padding: 16px !important;
+}
+
+::ng-deep .mat-mdc-card-content {
+    padding: 16px !important;
+}
+
+.matCard {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.order {
+    display: flex;
+}
+
+.order-units {
+    margin-right: 40px;
+}
+
+.adv-cost {
+    margin-right: 60px;
+}
+
+::ng-deep .mdc-card__actions {
+    justify-content: center;
+}
+
+.example-card {
+    width: 250px;
+}
+
+.gridTable {
+    margin-top: 20px;
+}
+
+.sales-label {
+    font-size: 14px;
+    font-weight: 400;
+    color: #b4b4b4;
+}
+
+.sale-price {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.order-profit {
+    margin-top: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+.order-cost {
+    border-bottom: 1px solid lightgray;
+}
+
+.cost {
+    font-size: 15px;
+}
+
+.menu-header {
+    display: flex;
+    padding: 0px 0px 0px 16px;
+}
+
+.content {
+    margin-right: 40px;
+}
+
+.close-btn .mat-mdc-menu-item {
+    padding-right: 0px !important;
+}
+
+.mat-mdc-menu-item .mat-icon {
+    margin-right: 10px !important;
+}
+
+.navbar-title {
+    font-size: 1.5rem;
+    margin-right: 20px;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
+    font-size: 16px;
+}
+
+.mat-button {
+    margin-right: 10px;
+}
+
+.active {
+    background-color: #84bcf3;
+    color: white;
+}
+
+.dashboard-viewType {
+    margin-top: 30px;
+    .mat-toolbar {
+        background-color: white;
+    }
+}
+
+::ng-deep .mat-mdc-card-header {
+    background-color: #94a3e769;
+}
+
+mat-toolbar.page-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    // padding: 30px 0px 16px 0px;
+    background: none;
+    height: auto;
+    .heading-text {
+        font-weight: 400;
+        font-size: 38.4px;
+        color: #B9B9B9;
+        line-height: 1;
+        letter-spacing: -0.2186px;
+    }
+    @media (max-width: 576px) {
+        flex-direction: column;
+        align-items: baseline;
+    }
+}
+
