@@ -1,14 +1,20 @@
-<div class="main_wrapper">
+<!-- <div class="main_wrapper">
     <app-header (isShowSidebar)="sidenav.toggle($event)" [isMenuOpened]="isShowSidebar"></app-header>
-    <!-- <div class=""> -->
-        <mat-sidenav-container>
-            <mat-sidenav #sidenav mode="side" [(opened)]="isShowSidebar " class="layout-sidebar "
-                [mode]="mobileQuery.matches ? 'over' : 'side' " [fixedInViewport]="mobileQuery.matches ">
-                <app-sidebar></app-sidebar>
-            </mat-sidenav>
-            <mat-sidenav-content class="Content">
-                <router-outlet></router-outlet>
-            </mat-sidenav-content>
-        </mat-sidenav-container>
-    <!-- </div> -->
+    <mat-sidenav-container>
+        <mat-sidenav #sidenav mode="side" [(opened)]="isShowSidebar " class="layout-sidebar "
+            [mode]="mobileQuery.matches ? 'over' : 'side' " [fixedInViewport]="mobileQuery.matches ">
+        </mat-sidenav>
+        <mat-sidenav-content class="Content">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div> -->
+<app-header (ShowSidebarEvent)="getShowSidebarEvent($event)" [isMenuOpened]="isShowSidebar"></app-header>
+<div class="main-section" [class.show-side-bar]="isShowSidebar">
+    <div class="side-bar">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="router-outlet">
+        <router-outlet></router-outlet>
+    </div>
 </div>

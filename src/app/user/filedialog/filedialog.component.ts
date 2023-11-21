@@ -22,7 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FiledialogComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
-  displayedColumns: string[] = ['view', 'fileName', 'createdDate', 'status', 'action'];
+  displayedColumns: string[] = ['view', 'fileName', 'createdDate', 'status','uploaded-by','action'];
   buttonClicked: boolean = false;
 
   constructor(
@@ -44,12 +44,6 @@ export class FiledialogComponent implements OnInit {
   filelistData: any[] = [];
   data: any;
   getCurrentUserId: number;
-  classList = {
-    "backgroound-row-1": false,
-    "backgroound-row-2": false,
-    "backgroound-row-3": false,
-    "backgroound-default": true,
-  }
 
   ngOnInit(): void {
     let userId = this.userData?.userid;
@@ -323,7 +317,7 @@ export class FiledialogComponent implements OnInit {
 
     Swal.fire({
       title: `Are you sure you want to ${proveStatus ? 'Accent' : 'Reject'} this file ?`,
-      icon: proveStatus,
+      icon: `${proveStatus ? 'success' : 'warning'}`,
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',

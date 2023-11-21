@@ -1,14 +1,14 @@
 <div class="fileDailog_wrapper">
     <div class="dialog_heading">
         <div class="top-header">
-            <h3 class="title-name">File Upload</h3>
+            <h3 class="title-name">Upload File</h3>
         </div>
 
         <div class="file-upload-box">
             <div class="upload-file">
                 <input id="ulopad-file" #fileUpload type="file" (change)="onFileSelected($event)">
                 <label class="upload-text" for="ulopad-file"> <mat-icon>cloud_upload</mat-icon> 
-                    <span class="upload-text-inner">{{inputFileName?inputFileName:'upload file'}}
+                    <span class="upload-text-inner">{{inputFileName?inputFileName:'Upload File '}}
                     </span></label>
             </div>
             <button mat-raised-button color="primary" (click)="ImportHistoricalData()"

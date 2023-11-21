@@ -1,17 +1,20 @@
-<mat-toolbar class="header">
-    <div class="header__title">
-        <button class="header__title-button" mat-mini-fab (click)="openMenu()">
-        <mat-icon *ngIf="!isMenuOpened" class="header__title-button-icon">menu</mat-icon>
-        <mat-icon *ngIf="isMenuOpened" class="header__title-button-icon">arrow_back</mat-icon>
+<header class="header-bar">
+  <div class="header-main">
+    <div class="header-inner-section">
+      <button class="header-title-button" (click)="openMenu()">
+        <mat-icon *ngIf="isMenuOpened" class="btn-icon">menu</mat-icon>
+        <mat-icon *ngIf="!isMenuOpened" class="btn-icon">arrow_back</mat-icon>
       </button>
-        <h6 class="header__title-text">Amazon Tool</h6>
+      <h4 class="header-title-text">Amazon Tool</h4>
     </div>
-    <div class="d-flex justify-content-end ">
-        <!-- <button type="submit" mat-button>Basic</button> -->
-        <button type="submit" mat-icon-button color="accent" (click)="logout()" aria-label="Example icon button with a menu icon">
-          <mat-icon><i class=" fa fa-sign-out " style="font-size:25px;color:white;"></i></mat-icon>
-        </button>
-        <!-- <button type="submit" color="primary" class="header__title-button-icon" mat-mini-fab aria-label="Example icon button with a home icon"> <mat-icon><i class=" fa fa-sign-out " style="font-size:25px;color:white;"></i></mat-icon>
-        </button> -->
-    </div>
-</mat-toolbar>
+
+    <button class="icon-btn" (click)="logout()">
+      <mat-icon><i class="fa fa-sign-out" style="font-size:24px;color:white;"></i></mat-icon>
+    </button>
+
+    <!-- <button type="submit" mat-icon-button color="accent" (click)="logout()"
+      aria-label="Example icon button with a menu icon">
+      <mat-icon><i class=" fa fa-sign-out " style="font-size:24px;color:white;"></i></mat-icon>
+    </button> -->
+  </div>
+</header>

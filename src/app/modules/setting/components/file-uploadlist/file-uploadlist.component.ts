@@ -61,7 +61,7 @@ export class FileUploadlistComponent implements OnInit {
 
 
   public onFileSelected(event) {
-    debugger
+     
     const file = event.target.files[0];
     if (file) {
       this.inputFileName = file.name;
@@ -111,7 +111,7 @@ export class FileUploadlistComponent implements OnInit {
   }
 
   ImportHistoricalData() {
-    debugger
+     
     this.buttonClicked = true;
     if (this.fileData) {
       this.isLoaderShow = true;

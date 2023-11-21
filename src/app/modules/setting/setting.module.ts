@@ -8,12 +8,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { UpdateLinkComponent } from './components/update-link/update-link.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     MainSectionComponent,
-    FileUploadlistComponent
+    FileUploadlistComponent,
+    UpdateLinkComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +24,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatProgressSpinnerModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class SettingModule { }
