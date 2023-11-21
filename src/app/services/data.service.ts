@@ -24,10 +24,10 @@ export class DataService {
   }
 
   ProcessCSVData(): Observable<StandardResponse<any>>{
-    return this.http.get<StandardResponse<any>>(`${this.baseAPIUrl}User/ImportHistoricalData`);
+    return this.http.get<StandardResponse<any>>(`${this.baseAPIUrl}ImportData/ImportHistoricalData`);
   }
 
   ProcessLinkData(): Observable<StandardResponse<any>>{
-    return this.http.get<StandardResponse<any>>(`${this.baseAPIUrl}User/ImportUserDataByLink`);
+    return this.http.get<StandardResponse<any>>(`${this.baseAPIUrl}ImportData/ImportUserDataByLink`);
   }
 }

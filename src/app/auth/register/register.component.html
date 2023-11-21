@@ -40,6 +40,14 @@
                     <!-- <mat-icon matSuffix>account_circle</mat-icon> -->
                 </mat-form-field>
                 <mat-form-field class="width-100">
+                    <input matInput placeholder="{{ 'Email' | translate }}" required name="email"
+                        formControlName="email">
+                    <mat-error *ngIf="f['email'] && f['email'].errors && f['email'].errors['required']">{{ 'Email-Error'
+                        | translate }}</mat-error>
+                    <mat-error *ngIf="f['email'].hasError('pattern')">Invalid email address.</mat-error>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+                <mat-form-field class="width-100">
                     <input matInput placeholder="{{ 'PhoneNo' | translate }}" required name="phoneNo"
                         formControlName="phoneNo" maxlength="12" appNumberValidator>
                     <!-- <input matInput placeholder="Email"  ngModel #email="ngModel"> -->
@@ -49,14 +57,7 @@
                     <!-- <mat-icon matSuffix><i class="fa fa-building" aria-hidden="true"></i></mat-icon> -->
                     <mat-icon matSuffix>phone_iphone</mat-icon>
                 </mat-form-field>
-                <mat-form-field class="width-100">
-                    <input matInput placeholder="{{ 'Email' | translate }}" required name="email"
-                        formControlName="email">
-                    <mat-error *ngIf="f['email'] && f['email'].errors && f['email'].errors['required']">{{ 'Email-Error'
-                        | translate }}</mat-error>
-                    <mat-error *ngIf="f['email'].hasError('pattern')">Invalid email address.</mat-error>
-                    <mat-icon matSuffix>email</mat-icon>
-                </mat-form-field>
+               
                 <mat-form-field class="width-100">
                     <input matInput type="password" placeholder="{{ 'Password' | translate }}" required name="password"
                         formControlName="password">

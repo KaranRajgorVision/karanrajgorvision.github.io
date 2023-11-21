@@ -7,15 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() isMenuOpened: boolean;
-  @Output() isShowSidebar = new EventEmitter<boolean>();
+  @Input() isMenuOpened: boolean=true;
+  @Output() ShowSidebarEvent = new EventEmitter<boolean>();
 
   constructor(private router: Router) { }
 
   openMenu(): void {
     this.isMenuOpened = !this.isMenuOpened;
-
-    this.isShowSidebar.emit(this.isMenuOpened);
+    this.ShowSidebarEvent.emit(this.isMenuOpened);
   }
 
   public logout() {

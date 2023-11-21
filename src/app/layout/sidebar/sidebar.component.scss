@@ -1,228 +1,86 @@
-                        .example-container {
-                            // height: 500px;
-                            // border: 1px solid rgba(0, 0, 0, 0.5);
-                        }
+.list-menu {
+    list-style: none;
+    padding: 0;
+    // width: 250px;
+    border-right: 1px solid #d5d5d5;
+    margin: 0;
+    height: 100%;
 
-                        .example-sidenav-content {
-                            // display: flex;
-                            // height: 100%;
-                            // align-items: center;
-                            // justify-content: center;
-                            padding: 25px;
-                            margin-top: 60px;
-                        }
+    .list-item {
+        padding: 5px 15px;
+        
+        &:first-child {
+            padding-top: 10px;
+        }
 
-                        .example-sidenav {
-                            user-select: none;
-                        }
+        .activeSubMenu {
+            // .list-item-contant {
+                background-color: #e0e0e0;
+            // }
+        }
 
-                        .full-width {
-                            width: 100%;
-                        }
+        .list-item-contant {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #d5d5d5;
+            vertical-align: top;
+            line-height: 30px;
+            padding: 8px 15px;
+            color: #000000de;
+            cursor: pointer;
 
-                        .menu-button {
-                            transition: 300ms ease-in-out;
-                            transform: rotate(0deg);
-                        }
+        }
 
-                        .menu-button.rotated {
-                            transform: rotate(180deg);
-                        }
+        .mat-icon {
+            margin-right: 15px;
+            font-size: 20px;
 
-                        .submenu {
-                            overflow-y: hidden;
-                            transition: transform 300ms ease;
-                            transform: scaleY(0);
-                            transform-origin: top;
-                            padding-left: 30px;
-                        }
+            i {
+                font-size: 20px;
+            }
+        }
 
-                        .submenu.expanded {
-                            transform: scaleY(1);
-                        }
+        .list-item-title {
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+        }
 
-                        // ::ng-deep .mat-toolbar-single-row {
-                        //   padding: 0px !important;
-                        // }
-                        // ::ng-deep .mat-drawer-inner-container{
-                        //   width: 150px !important;
-                        // }
-                        .mat-toolbar {
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            z-index: 1030
-                        }
+        &.add-sub-menu {
+            overflow: hidden;
 
-                         ::ng-deep .mat-sidenav {
-                            margin-top: 64px;
-                            position: fixed;
-                        }
+            // &.activeSubMenu {
+            //     background-color: red;
+            //     .list-menu {
+            //         &.sub-list-menu {
+            //             height:unset;
+            //         }
+            //     }
+            // }
 
-                        .mat-mdc-list-item {
-                            margin: 20px 0;
-                        }
+            .list-menu {
+                width: 100%;
+                border-right: unset;
 
-                        .mat-mdc-list-base .mat-icon {
-                            margin-right: 15px;
-                            margin-bottom: -6px;
-                            color: #3f51b5;
-                        }
+                &.sub-list-menu {
+                    transition: height 0.5s linear;
+                    height: 0;
+                }
 
-                        .active {
-                            // background-color: #3f51b5;
-                            /* Background color for active tab */
-                            color: #3f51b5;
-                            /* Text color for active tab */
-                            font-weight: bold;
-                            /* Adjust text weight for active tab */
-                        }
+                .list-item {
+                    padding-right: 0px;
 
-                        // @import "/src/styles/color.scss";
-                        // @import "/src/styles/font.scss";
-                        // @import "/src/styles/variables.scss";
-                        // .mat-mdc-list-base {
-                        //     border-bottom: 1px solid #D8D8D880;
-                        //     width: 210px;
-                        //     padding-bottom: 16px;
-                        //     & .mat-list-item {
-                        //         display: flex;
-                        //         cursor: pointer;
-                        //         color: white !important;
-                        //         width: auto;
-                        //         padding-left: 4px;
-                        //         &.active {
-                        //             color: white !important;
-                        //             background-color: #3f51b5;
-                        //             outline: none;
-                        //             & .mat-icon {
-                        //                 color: white !important;
-                        //             }
-                        //             & .circle {
-                        //                 background-color: #536DFE;
-                        //             }
-                        //         }
-                        //         &:hover {
-                        //             background-color: #F3F5FF;
-                        //         }
-                        //         &:focus {
-                        //             outline: none;
-                        //         }
-                        //     }
-                        // }
-                        // .mat-mdc-list-base {
-                        //     // border-bottom: 1px solid #D8D8D880;
-                        //     width: 200px;
-                        //     padding: 20px;
-                        //     .mat-list-item {
-                        //         display: flex;
-                        //         cursor: pointer;
-                        //         color: white !important;
-                        //         width: auto;
-                        //         padding-left: 4px;
-                        //         &-.active {
-                        //             color: white !important;
-                        //             background-color: #3f51b5;
-                        //             outline: none;
-                        //             .mat-icon {
-                        //                 margin-right: 15px;
-                        //                 margin-bottom: -6px;
-                        //                 color: white !important;
-                        //             }
-                        //             .circle {
-                        //                 background-color: #536DFE;
-                        //             }
-                        //         }
-                        //         &:hover {
-                        //             background-color: #F3F5FF;
-                        //         }
-                        //         &:focus {
-                        //             outline: none;
-                        //         }
-                        //     }
-                        // }
-                        .mat-mdc-list-base {
-                            width: 200px;
-                            padding: 20px;
-                            .mat-list-item {
-                                display: flex;
-                                cursor: pointer;
-                                color: white !important;
-                                width: auto;
-                                padding-left: 4px;
-                                .active {
-                                    &:hover,
-                                    &.active {
-                                        // color: white !important;
-                                        color: #3f51b5;
-                                        outline: none;
-                                        .mat-icon {
-                                            margin-right: 15px;
-                                            margin-bottom: -6px;
-                                            color: red !important;
-                                            /* Change the color to your preferred color */
-                                        }
-                                        .circle {
-                                            background-color: #536DFE;
-                                        }
-                                    }
-                                    &:hover {
-                                        background-color: #F3F5FF;
-                                    }
-                                    &:focus {
-                                        outline: none;
-                                    }
-                                }
-                            }
-                            .mat-icon {
-                                margin-right: 15px;
-                                margin-bottom: -6px;
-                                color: black;
-                            }
-                            .sidebar-title {
-                                color: rgba(110, 110, 110, 0.8);
-                                ;
-                                font-size: 16px;
-                                text-transform: uppercase;
-                                margin-top: 32px;
-                                margin-left: 24px;
-                                margin-bottom: 16px;
-                            }
-                            .circle {
-                                width: 5px;
-                                height: 5px;
-                                border-radius: 50%;
-                                background-color: rgba(110, 110, 110, 0.8);
-                                margin-right: 30px;
-                            }
-                            .project-circle {
-                                width: 8px;
-                                height: 8px;
-                                border-radius: 50%;
-                                margin-right: 15px;
-                                margin-left: 8px;
-                            }
-                        }
+                    &:first-child {
+                        padding-top: 5px;
+                    }
 
-                        //color for sidebar
+                    &:last-child {
+                        padding-bottom: 5px;
+                    }
+                }
+            }
 
-                        .mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive){
-                          cursor: pointer;
-                        }
-                        .spinner-container {
-                          display: flex;
-                          justify-content: center;
-                          /* Center horizontally */
-                          align-items: center;
-                          /* Center vertically */
-                          height: 100vh;
-                          /* Set the container height to the full viewport height */
-                          position: fixed;
-                          /* Make it a fixed position to overlay the whole page */
-                          top: 0;
-                          left: 0;
-                          right: 0;
-                          bottom: 0;
-                          background-color: rgba(0, 0, 0, 0.5);
-                          /* Optional: Add a semi-transparent background */
-                      }
+        }
+    }
+}

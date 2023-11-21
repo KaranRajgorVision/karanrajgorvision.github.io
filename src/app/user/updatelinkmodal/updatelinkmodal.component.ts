@@ -1,22 +1,18 @@
 import {
+  AfterContentInit,
   Component,
-  ComponentFactoryResolver,
+  ElementRef,
   Inject,
   OnInit,
+  ViewChild,
 } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
-import { UserService } from '../user.service';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
-import { Overlay, OverlayConfig } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+
 import { ToastrService } from 'ngx-toastr';
+import { ApiMethodService } from 'src/app/services/apiService/api-method.service';
+import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-updatelinkmodal',
@@ -24,66 +20,161 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./updatelinkmodal.component.scss'],
 })
 export class UpdatelinkmodalComponent implements OnInit {
-  public linkForm: FormGroup;
-  fileLink: string;
+  dataSource: MatTableDataSource<any>;
+  displayedColumns: string[] = ['linkUrl', 'status', 'uploadedBy', 'action'];
+  isSubmit: boolean = false;
+  getUserId: number;
+  uploadLinkEmpty = false;
   isLoaderShow: boolean = false;
+  responseData: any;
+  @ViewChild('uploadLink') uploadLink: ElementRef;
+  updateUrlFrom = new FormGroup({
+    updateUrl: new FormControl(''),
+  });
+  pattern =
+    /^(?:(http(s)?)?(sftp)?(ftp)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+
   constructor(
-    private overlay: Overlay,
-    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<UpdatelinkmodalComponent>,
     @Inject(MAT_DIALOG_DATA) public userData: any,
-    private sanitizer: DomSanitizer,
-    private userService: UserService,
-    private toastr: ToastrService
-  ) {
-    this.fileLink = userData?.fileLink;
+    private toastr: ToastrService,
+    private apiService: ApiMethodService,
+    private formBuilder: FormBuilder
+  ) { }
 
-    const pattern =
-      /^(?:(http(s)?)?(sftp)?(ftp)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+  ngOnInit(): void {
 
-    this.linkForm = this.formBuilder.group({
-      fileLink: [
-        userData?.fileLink,
-        [Validators.required, Validators.pattern(pattern)],
-      ],
-    });
+    this.updateUrlFrom = this.formBuilder.group({
+      updateUrl: new FormControl(this.userData.fileLink, [Validators.required, Validators.pattern(this.pattern)]),
+    })
+
+    const authToken = localStorage.getItem("authToken");
+    if (authToken) {
+      const authData = JSON.parse(authToken);
+      if (authData && authData.currentUserId) {
+        this.getUserId = authData.currentUserId;
+      }
+    }
+    this.getFileData(this.userData.userid);
   }
 
-  //get form control
-  get f(): { [key: string]: AbstractControl } {
-    return this.linkForm.controls;
-  }
+  // currectUrlUpload(uploadLinkString) {
+  //   const pattern =
+  //     /^(?:(http(s)?)?(sftp)?(ftp)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+  //   if (pattern.test(uploadLinkString)) {
+  //     this.isSubmit = false;
+  //   } else {
+  //     this.isSubmit = true;
+  //   }
+  // }
 
-  ngOnInit(): void {}
+  uploadLinkEvent(uploadLinkString) {
+    this.isSubmit = true;
+    if (this.updateUrlFrom.valid && this.isSubmit) {
 
-  UpdateUserDataLink() {
-    if (this.linkForm.valid) {
-      let localStorageData = localStorage.getItem('authToken');
-      let userId = this.userData?.userid;
-      let currentUserId = 0;
+      const uploadLink = "User/UpdateUserDataLink"
+      const UploadData = {
+        userID: this.userData.userid,
+        fileLink: uploadLinkString.updateUrl,
+        updatedByUserId: this.getUserId
+      }
 
-      let requestObj = {
-        userID: userId,
-        fileLink: this.linkForm.value.fileLink,
-        updatedByUserId: 0,
-      };
-
-      this.userService.UpdateUserDataLink(requestObj).subscribe((response) => {
-        if (response && response.payload != null && response.isSuccess) {
-          if (response.payload > 0) {
-            this.toastr.success('Link is Updated Sucessfully !!!', 'Success', {
-              timeOut: 3000, // or any other configuration
-            });
-
-            this.onNoClick();
-            this.isLoaderShow = false;
+      this.apiService.modifyData(uploadLink, UploadData).subscribe(
+        (response) => {
+          if (response) {
+            if (response) {
+              this.toastr.success('Link Updated Sucessfully !!', 'Success', {
+                timeOut: 3000,
+              });
+              this.isLoaderShow = false;
+              this.onNoClick()
+              this.getFileData(this.userData.userid);
+            }
+            this.updateUrlFrom.get('updateUrl')?.setValue('');
+            this.isSubmit = false;
+          }
+        },
+        (error) => {
+          this.isLoaderShow = false;
+          if (error && error.error) {
+            alert(error?.error?.errorMessage);
+          } else {
+            alert('Oops some error occured.');
           }
         }
-      });
+      );
     }
+    else {
+      this.isSubmit = true;
+    }
+
+  }
+
+  AcceptRejectUserLink(item, proveStatus) {
+
+    const apiUrl = "User/AcceptRejectUserLink"
+    // const passData = {
+    //   userLinkId: item.userLinkId,
+    //   linkUrl: item.linkUrl,
+    //   isApproved: proveStatus
+    // };
+
+    const passData = {
+      userLinkId: item.userLinkId,
+      userId: this.userData.userid,
+      isApproved: proveStatus,
+    };
+    const iconeName = `${proveStatus ? 'success' : 'warning'}`;
+
+    Swal.fire({
+      title: `Are you sure you want to ${proveStatus ? 'accept' : 'reject'} this link ?`,
+      icon: `${proveStatus ? 'success' : 'warning'}`,
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+
+        this.apiService.createData(apiUrl, passData)
+          ?.subscribe((response: any) => {
+            if (
+              response &&
+              response != null &&
+              response.payload != null &&
+              response.payload
+            ) {
+              this.onNoClick();
+              this.getFileData(this.userData.userid);
+            }
+          });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'error');
+      }
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  getFileData(id: any) {
+    const apiUrl = `User/GetUserUploadedLink?UserId=${id}`
+    this.apiService.getList(apiUrl)
+      ?.subscribe((response: any) => {
+        if (
+          response &&
+          response != null &&
+          response.payload != null &&
+          response.payload
+        ) {
+
+          this.responseData = response.payload;
+          const data: any[] = [];
+          data.push(response.payload);
+          this.dataSource = new MatTableDataSource(data);
+        }
+      });
+  }
+
 }

@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 //import ngx toaster
 @import 'ngx-toastr/toastr';
 
@@ -6,6 +12,20 @@
 html,
 body {
     height: 100%;
+}
+
+table {
+    border: 1px solid #e0e0e0 !important;
+
+    tr {
+        th {
+            text-transform: capitalize;
+            width: 200px;
+            &:first-child {
+                width: unset;
+            }
+        }
+    }
 }
 
 body {
@@ -79,14 +99,16 @@ body {
     max-width: 900px;
 }
 
-.no-data-found{
+.no-data-found {
     margin-bottom: 0;
     padding-top: 50px;
     text-align: center;
-    mat-icon{
+
+    mat-icon {
         vertical-align: sub;
     }
 }
+
 // //base
 // @import "assets/scss/base/index";
 // //base

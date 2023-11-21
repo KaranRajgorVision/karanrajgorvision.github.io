@@ -2,7 +2,6 @@
     height: 100%;
     width: 100%;
     overflow: auto;
-    padding: 30px 10px;
 }
 
 table {
@@ -90,9 +89,6 @@ tr th {
     width: 250px;
 }
 
-.gridTable {
-    margin-top: 20px;
-}
 
 .sales-label {
     font-size: 14px;
@@ -158,14 +154,21 @@ tr th {
 }
 
 .dashboard-viewType {
-    margin-top: 30px;
     .mat-toolbar {
         background-color: white;
     }
 }
+mat-paginator {
+    position: sticky;
+    bottom: 0;
+}
 
 ::ng-deep .mat-mdc-card-header {
     background-color: #94a3e769;
+}
+.mat-column-SKU{
+    text-wrap: nowrap;
+    text-transform: uppercase;
 }
 
 mat-toolbar.page-header {

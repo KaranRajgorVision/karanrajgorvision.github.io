@@ -5,6 +5,7 @@ import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
 import { Token } from '../Models/Common';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { DatePipe } from '@angular/common';
 
 export interface PeriodicElement {
   name: string;
@@ -30,6 +31,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  providers: [DatePipe],
 })
 export class DashboardComponent implements OnInit {
   isLoaderShow: boolean = false;
@@ -44,12 +46,14 @@ export class DashboardComponent implements OnInit {
   noDataAvailble = false;
   gridData = false;
 
-  constructor(private dataService: DataService, private router: Router) { }
+  constructor(private dataService: DataService, private router: Router,
+    private datePipe: DatePipe,) { }
 
   columns: string[] = ['position', 'name', 'weight', 'symbol'];
   menuItems: string[] = ['sales', 'units', 'promo'];
   submenuItems: string[] = ['Subitem 1', 'Subitem 2', 'Subitem 3'];
-
+  unSendCurrency = ['UnitsOrganic', 'UnitsPPC', 'UnitsSponsoredProducts', 'UnitsSponsoredDisplay', 'Refunds'];
+  showParcentage = ['Real ACOS', 'Margin'];
   ngOnInit() {
     this.getProcessFileData(this.pageIndex, this.pageSize);
     this.getCardData();
@@ -89,26 +93,45 @@ export class DashboardComponent implements OnInit {
         response.payload
       ) {
         // setTimeout(() => {
-          if (response.payload.paginationDataList.length) {
-            this.displayedColumns = this.getAllKeys(response);
-            this.dataSource = new MatTableDataSource<any>(
-              response.payload.paginationDataList
-            );
-            this.totalDataLength = response.payload?.totalDataCount;
-            this.isLoaderShow = false;
-          }
-          else {
-            this.gridData = true;
-            this.isLoaderShow = false;
-          }
+        if (response.payload.paginationDataList.length) {
+          this.displayedColumns = this.getAllKeys(response);
+          this.dataSource = new MatTableDataSource<any>(
+            response.payload.paginationDataList
+          );
+          this.totalDataLength = response.payload?.totalDataCount;
+          this.isLoaderShow = false;
+        }
+        else {
+          this.gridData = true;
+          this.isLoaderShow = false;
+        }
         // }, 2000);
       }
     });
   }
 
   renderCell(column: string, element: any): string {
-
     // const number = 123456.789; 
+    if (column === 'Date') {
+      const dateParts = element[column].split('-').reverse().join('.');
+      // if (dateParts.length === 3) {
+      //   const formattedDate = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
+      //   return formattedDate || '0';
+      // }
+      return dateParts || '0';
+    }
+
+    if (column === 'SKU') {
+      const allSku = element[column].split('_').join('-');
+      // if (allSku.length) {
+      //   const formattedDate = `${allSku[2]}-${allSku[1]}-${allSku[0]}`;
+      //   return formattedDate || '0';
+      // }
+      return allSku || '0';
+    }
+
+
+
     if (typeof element[column] === 'number') {
       const Germany = new Intl.NumberFormat(["ban", "id"], {
         style: "currency",
@@ -125,17 +148,22 @@ export class DashboardComponent implements OnInit {
       const currencyDisplay = '\u20AC'
 
       if (element[column] < 0) {
-        return `${currencyDisplay}-${formattedValue}`;
+        return `-${formattedValue} ${currencyDisplay}`;
       } else {
-        return `${currencyDisplay}${formattedValue}`;
+        return `${formattedValue} ${currencyDisplay}`;
       }
     }
 
-    if (typeof element[column] === 'object' && element[column] !== null) {
+    if (typeof element[column] == 'object' && element[column] == null) {
       return '0';
     } else {
       return element[column];
     }
+  }
+
+  formatDate(date: any) {
+    const formattedDate = this.datePipe.transform(date, 'yyyy.MM.dd');
+    return formattedDate;
   }
 
   getAllKeys(response: any) {

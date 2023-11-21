@@ -7,10 +7,11 @@
         <div class="link-upload-box">
             <form [formGroup]="updateUrlFrom" class="upload-link-box">
                 <mat-icon>cloud_upload</mat-icon>
-                <input formControlName="updateUrl" placeholder="Please enter url link"
+                <input id="link-link" formControlName="updateUrl" placeholder="Please enter url link"
                     type="text" class="upload-link-input">
             </form>
-            <button mat-raised-button color="primary" class="cms-button" (click)="uploadLinkEvent(updateUrlFrom.value)">
+            <button mat-raised-button color="primary" (click)="uploadLinkEvent(updateUrlFrom.value)">
+                <!-- <mat-icon>upload</mat-icon> -->
                 Submit Link
             </button>
 
@@ -24,11 +25,9 @@
                 </ng-container>
             </div>
         </div>
-
-
     </div>
 
-    <div class="fileData mat-elevation-z8 cms-table link-Table" *ngIf="responseData && responseData.linkUrl">
+    <div class="fileData mat-elevation-z8 cms-table" *ngIf="responseData && responseData.linkUrl">
         <table mat-table [dataSource]="dataSource">
             <ng-container matColumnDef="linkUrl">
                 <th mat-header-cell *matHeaderCellDef class="t-head">link Url</th>
@@ -41,16 +40,6 @@
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef class="t-head">Status</th>
                 <td mat-cell *matCellDef="let item">{{ item.status }}</td>
-            </ng-container>
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef class="t-head" width="200px">Action</th>
-                <td class="action-button-group" mat-cell *matCellDef="let item">
-                    <button mat-raised-button class="action-btn accent" *ngIf="item.status == 'Review Pending'"
-                        (click)="AcceptRejectUserLink(item,true)"><mat-icon>check</mat-icon>Accept</button>
-                    <button mat-raised-button class="action-btn" color="warn" *ngIf="item.status == 'Review Pending'"
-                        (click)="AcceptRejectUserLink(item,false)"><mat-icon>close</mat-icon>
-                        Reject</button>
-                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

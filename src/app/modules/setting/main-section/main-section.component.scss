@@ -1,0 +1,6 @@
+.mat-mdc-cell {
+    &:first-child {
+        text-wrap: wrap !important;
+        max-width: 350px;
+    }
+}
