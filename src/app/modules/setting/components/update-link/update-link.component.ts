@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { ApiMethodService } from 'src/app/services/apiService/api-method.service';
+import { GlobalVariableService } from 'src/app/services/global-variable.service';
 
 import { IGetUserUploadedLinkApiResponceData, IUploadApiResponceData, IUploadDataType } from 'src/app/Models/setting-model';
 import { SERVICE_URLS } from 'src/app/services/apiService/api-url';
@@ -40,7 +41,9 @@ export class UpdateLinkComponent {
   constructor(
     private toastr: ToastrService,
     private apiService: ApiMethodService,
+    private globalSpinner: GlobalVariableService,
     private formBuilder: FormBuilder
+
   ) { }
 
   ngOnInit(): void {
@@ -72,9 +75,11 @@ export class UpdateLinkComponent {
     this.isSubmit = true;
     if (this.updateUrlFrom.valid && this.isSubmit) {
       const UploadData: IUploadDataType = {
+        
         userID: this.getUserId,
         linkUrl: uploadLinkString.updateUrl
       }
+      this.globalSpinner.showSpinner();
       this.apiService.createData<IUploadApiResponceData>(SERVICE_URLS.UserUrl.addUpdateUserLink, UploadData).subscribe({
         next: (response: IUploadApiResponceData) => {
           if (response) {
@@ -85,6 +90,7 @@ export class UpdateLinkComponent {
               this.updateUrlFrom.get('updateUrl')?.setValue('');
               this.isSubmit = false;  
               this.isLoaderShow = false;
+              this.globalSpinner.hideSpinner();
               this.getFileData(this.getUserId);
             }
           }
@@ -107,6 +113,7 @@ export class UpdateLinkComponent {
   }
 
   getFileData(id: any) {
+    this.globalSpinner.showSpinner();
     const apiUrl = `${SERVICE_URLS.UserUrl.getUserUploadedLink}?UserId=${id}`
     this.apiService.getList(apiUrl)
       ?.subscribe((response: any) => {
@@ -120,6 +127,7 @@ export class UpdateLinkComponent {
           const data: any[] = [];
           data.push(response.payload);
           this.dataSource = new MatTableDataSource(data);
+          this.globalSpinner.hideSpinner();
         }
       });
   }

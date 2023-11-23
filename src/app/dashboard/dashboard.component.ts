@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Token } from '../Models/Common';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { DatePipe } from '@angular/common';
+import { GlobalVariableService } from '../services/global-variable.service';
 
 export interface PeriodicElement {
   name: string;
@@ -47,6 +48,7 @@ export class DashboardComponent implements OnInit {
   gridData = false;
 
   constructor(private dataService: DataService, private router: Router,
+    private globalSpinner: GlobalVariableService,
     private datePipe: DatePipe,) { }
 
   columns: string[] = ['position', 'name', 'weight', 'symbol'];
@@ -60,7 +62,8 @@ export class DashboardComponent implements OnInit {
   }
 
   downloadAndProcessCSVFile() {
-    this.isLoaderShow = true;
+    // this.isLoaderShow = true;
+    this.globalSpinner.showSpinner();
     this.dataService.DownloadAndProcessFile().subscribe((response) => {
       if (
         response &&
@@ -74,7 +77,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getProcessFileData(pageNumber: any, pageSize: any) {
-    this.isLoaderShow = true;
+    this.globalSpinner.showSpinner();
     pageNumber = pageNumber == 0 ? pageNumber + 1 : pageNumber;
     let requestObject = {
       pageNumber: pageNumber,
@@ -99,11 +102,11 @@ export class DashboardComponent implements OnInit {
             response.payload.paginationDataList
           );
           this.totalDataLength = response.payload?.totalDataCount;
-          this.isLoaderShow = false;
+          this.globalSpinner.hideSpinner();
         }
         else {
           this.gridData = true;
-          this.isLoaderShow = false;
+          this.globalSpinner.hideSpinner();
         }
         // }, 2000);
       }
@@ -111,26 +114,10 @@ export class DashboardComponent implements OnInit {
   }
 
   renderCell(column: string, element: any): string {
-    // const number = 123456.789; 
     if (column === 'Date') {
       const dateParts = element[column].split('-').reverse().join('.');
-      // if (dateParts.length === 3) {
-      //   const formattedDate = `${dateParts[2]}.${dateParts[1]}.${dateParts[0]}`;
-      //   return formattedDate || '0';
-      // }
       return dateParts || '0';
     }
-
-    if (column === 'SKU') {
-      const allSku = element[column].split('_').join('-');
-      // if (allSku.length) {
-      //   const formattedDate = `${allSku[2]}-${allSku[1]}-${allSku[0]}`;
-      //   return formattedDate || '0';
-      // }
-      return allSku || '0';
-    }
-
-
 
     if (typeof element[column] === 'number') {
       const Germany = new Intl.NumberFormat(["ban", "id"], {
@@ -143,7 +130,6 @@ export class DashboardComponent implements OnInit {
       });
 
       const formattedValue = Germany.format(Math.abs(element[column])).replace("€", "");
-      // const formattedValue = Germany.format(Math.abs(number)).replace("€", "");
 
       const currencyDisplay = '\u20AC'
 
@@ -157,7 +143,12 @@ export class DashboardComponent implements OnInit {
     if (typeof element[column] == 'object' && element[column] == null) {
       return '0';
     } else {
-      return element[column];
+      if(column == "sku"){
+        return element["SKU"];
+      }
+      else{
+        return element[column];
+      }
     }
   }
 
@@ -169,7 +160,8 @@ export class DashboardComponent implements OnInit {
   getAllKeys(response: any) {
     let allkeys: any[] = [];
     for (const item of response.payload.paginationDataList) {
-      allkeys.push(...Object.keys(item));
+      const keys = Object.keys(item).map(key => (key.toLowerCase() === 'sku' ? 'sku' : key));
+      allkeys.push(...keys);
     }
 
     allkeys = [...new Set(allkeys)];

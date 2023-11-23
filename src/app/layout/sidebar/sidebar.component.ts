@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ToastrService } from 'ngx-toastr';
 import { RolebaseAuthService } from 'src/app/auth/rolebase-auth.service';
 import { DataService } from 'src/app/services/data.service';
+import { GlobalVariableService } from 'src/app/services/global-variable.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,7 +22,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   constructor(private rolebaseAuth: RolebaseAuthService,
     private dataService: DataService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private globalSpinner: GlobalVariableService
   ) { }
   ngAfterViewInit(): void {
 
@@ -87,13 +89,15 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.isLoaderShow = true;
     this.dataService.ProcessLinkData().subscribe(
       (response) => {
-        this.isLoaderShow = false;
-        this.toastr.success('Date from Link Has been Processed', 'Success', {
+        // this.isLoaderShow = false;
+        this.globalSpinner.hideSpinner();
+        this.toastr.success('Data from Link Has been Processed', 'Success', {
           timeOut: 3000,
         });
       },
       (error) => {
-        this.isLoaderShow = false;
+        // this.isLoaderShow = false;
+        this.globalSpinner.hideSpinner();
         this.toastr.error('Oops some error occured', 'Error', {
           timeOut: 3000,
         });
