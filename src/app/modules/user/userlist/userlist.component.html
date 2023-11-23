@@ -1,0 +1,54 @@
+<div class="Table_wrapper">
+    <mat-toolbar color="primary" class="headerClass">
+        <span>Users List</span>
+        <button type="submit" mat-raised-button (click)="addNewUser($event)">Add User</button>
+    </mat-toolbar>
+    <div class="mat-elevation-z8" *ngIf="getAllUSerdata.length>0 else nodataFound">
+        <table mat-table [dataSource]="dataSource" class="">
+            <!-- Position Column -->
+            <ng-container matColumnDef="No.">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element"> </td>
+            </ng-container>
+            <ng-container matColumnDef="FullName">
+                <th mat-header-cell *matHeaderCellDef class="t-head"> Full Name </th>
+                <td mat-cell *matCellDef="let element" class="t-content ">{{element.firstName + ' '+
+                    element.lastName}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Email">
+                <th mat-header-cell *matHeaderCellDef class="t-head"> Email </th>
+                <td mat-cell *matCellDef="let element" class="t-content"> {{element.email}} </td>
+            </ng-container>
+            <ng-container matColumnDef="CompanyName">
+                <th mat-header-cell *matHeaderCellDef class="t-head"> Company Name </th>
+                <td mat-cell *matCellDef="let element" class="t-content ">{{element.companyName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="PhoneNo">
+                <th mat-header-cell *matHeaderCellDef class="t-head"> Phone No. </th>
+                <td mat-cell *matCellDef="let element" class="t-content"> {{element.phoneNo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="ImportFile">
+                <th mat-header-cell *matHeaderCellDef class="t-head"> Action </th>
+                <td mat-cell *matCellDef="let element" class="t-content">
+
+                    <button mat-raised-button color="primary" style="margin-right: 10px; padding: 20px;"
+                        matTooltip="Upload file" (click)="openDialog(element)"><i class="fa fa-upload"
+                            style="font-size: 1.2rem;" aria-hidden="true"></i> </button>
+                    <button mat-raised-button color="accent" style="padding-left: 25px;font-size: 1.2rem;"
+                        matTooltip="Upload Url" (click)="openLinkUploadDialog(element)"> <mat-icon
+                            matSuffix>link</mat-icon></button>
+
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns "></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; "></tr>
+        </table>
+    </div>
+    <ng-template #nodataFound>
+        <h2 class="no-data-found"><mat-icon>assignment_late</mat-icon> No Data Found Now</h2>
+    </ng-template>
+</div>

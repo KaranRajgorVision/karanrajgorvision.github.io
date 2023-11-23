@@ -20,6 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDividerModule } from '@angular/material/divider';
 import { HeaderComponent } from './header/header.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { HeaderComponent } from './header/header.component';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     LayoutRoutingModule,
     MatButtonModule,
     MatTableModule,

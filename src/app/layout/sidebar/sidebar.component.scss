@@ -8,7 +8,7 @@
 
     .list-item {
         padding: 5px 15px;
-        
+
         &:first-child {
             padding-top: 10px;
         }
@@ -71,6 +71,10 @@
                 .list-item {
                     padding-right: 0px;
 
+                        .mat-mdc-list-item:not(.mat-mdc-list-item-interactive), .mat-mdc-list-option:not(.mat-mdc-list-item-interactive){
+                          cursor: pointer;
+                        }
+                     
                     &:first-child {
                         padding-top: 5px;
                     }
@@ -83,4 +87,22 @@
 
         }
     }
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  align-items: center;
+  /* Center vertically */
+  height: 100vh;
+  /* Set the container height to the full viewport height */
+  position: fixed;
+  /* Make it a fixed position to overlay the whole page */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Optional: Add a semi-transparent background */
 }

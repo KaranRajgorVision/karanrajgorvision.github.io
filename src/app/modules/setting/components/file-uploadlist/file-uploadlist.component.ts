@@ -10,8 +10,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/user/user.service';
 import { DatePipe } from '@angular/common';
+import { GlobalVariableService } from 'src/app/services/global-variable.service';
+import { UserService } from 'src/app/modules/user/user.service';
 
 @Component({
   selector: 'app-file-uploadlist',
@@ -29,6 +30,7 @@ export class FileUploadlistComponent implements OnInit {
     private userService: UserService,
     private toastr: ToastrService,
     private datePipe: DatePipe,
+    private globalSpinner: GlobalVariableService
   ) { }
   ngOnInit(): void {
 
@@ -114,7 +116,7 @@ export class FileUploadlistComponent implements OnInit {
      
     this.buttonClicked = true;
     if (this.fileData) {
-      this.isLoaderShow = true;
+      this.globalSpinner.showSpinner();
       // let localStorageData = localStorage.getItem('authToken');
       // // let userId = this.userData?.userid;
       // let currentUserId = 0;
@@ -137,7 +139,7 @@ export class FileUploadlistComponent implements OnInit {
                 timeOut: 3000, // or any other configuration
               });
               // this.onNoClick();
-              this.isLoaderShow = false;
+              this.globalSpinner.hideSpinner();
               this.getFileData(this.getUserId);
               this.inputFileName = '';
               this.buttonClicked = false;
@@ -146,7 +148,7 @@ export class FileUploadlistComponent implements OnInit {
           }
         },
         (error) => {
-          this.isLoaderShow = false;
+          this.globalSpinner.hideSpinner();
           if (error && error.error) {
             alert(error?.error?.errorMessage);
           } else {
@@ -165,6 +167,7 @@ export class FileUploadlistComponent implements OnInit {
   }
 
   getFileData(id: any) {
+    this.globalSpinner.showSpinner();
     this.userService
       .GetUserHistoricalDataFileList(id)
       ?.subscribe((response: any) => {
@@ -181,6 +184,7 @@ export class FileUploadlistComponent implements OnInit {
             item.createdDate = originalDate;
           }
           this.dataSource = new MatTableDataSource(this.filelistData);
+          this.globalSpinner.hideSpinner();
         }
       });
   }
